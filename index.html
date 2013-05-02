@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>API Tests</title>
+  <!-- We don't need localization in this app -->
+  <link rel="stylesheet" type="text/css" href="style/apitest.css">
+  <script type="text/javascript" src="js/apitest.js"></script>
+</head>
+<body>
+  <div id="tests" class="panel">
+    <div class="toolbar toolbar-top">
+      <p class="toolbar-title">API Tests</p>
+    </div>
+    <ul class="list" id="test-list">
+      <li><a href="#test=Moe">Moe</a></li>
+      <li><a href="#test=Larry">Larry</a></li>
+      <li><a href="#test=Curly">Curly</a></li>
+    </ul>
+  </div>
+  <div id="test-panel" class="panel">
+    <div class="toolbar toolbar-top">
+      <button id="test-panel-back">back</button>
+      <p id="test-panel-title" class="toolbar-title"></p>
+    </div>
+    <iframe id="test-iframe" mozallowfullscreen="true"></iframe>
+  </div>
+</body>
+</html>
