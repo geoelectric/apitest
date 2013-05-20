@@ -24,5 +24,5 @@ function update() {
 
 window.screen.onmozorientationchange = onEvent;
 window.document.onmozfullscreenchange = onEvent;
-window.document.onmozflulscreenerror = onEvent;
+window.document.onmozfullscreenerror = onEvent;
 window.setInterval(update, 100);
