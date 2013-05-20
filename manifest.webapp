@@ -7,13 +7,8 @@
     "url": "https://github.com/geoelectric/apitest"
   },
   "icons": {
-    "120": "/style/icons/Apitest.png"
+    "128": "/style/icons/Apitest.png"
   },
   "permissions": {
-    "backgroundservice":{},
-    "attention":{},
-    "contacts":{ "access": "readwrite" },
-    "settings":{ "access": "readwrite" },
-    "desktop-notification":{}
   }
 }
