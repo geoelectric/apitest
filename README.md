@@ -1,7 +1,7 @@
 apitest
 =======
 
-API Test App for Firefox OS Gaia
+API Testbed for Firefox OS
 
 Install using Firefox OS Simulator
 
