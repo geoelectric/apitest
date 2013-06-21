@@ -64,7 +64,7 @@ var APITest = {
           this.closeTest();
           return;
         }
-        this.panelTitle.textContent = name;
+        this.panelTitle.textContent = name.replace(/_/g, ' ');
         this.openTest(name);
         break;
       case 'transitionend':
@@ -79,7 +79,7 @@ var APITest = {
 
     var self = this;
     window.setTimeout(function openTestPage() {
-      self.iframe.src = './tests/' + name + '.html';
+      self.iframe.src = './tests/' + name.toLowerCase() + '.html';
     }, 200);
 },
   closeTest: function at_closeTest() {

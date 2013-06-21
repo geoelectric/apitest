@@ -1,0 +1,12 @@
+body {
+  font-family: sans-serif;
+}
+
+button {
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.result {
+  color: red;
+}
