@@ -10,24 +10,23 @@
   <body>
     <p>API Self-Test: <span id="selftest" class="result">Not Run</span></p>
 
-    <p>Result: <span id="result" class="result">None</span>
-    <br>Event: <span id="event" class="result">None</span></p>
+    <p>Last Result: <span id="lastresult" class="result">None</span>
+    <br>Radio Event: <span id="radioevent" class="result">None</span>
+    <br>Change Event: <span id="changeevent" class="result">None</p>
 
     <h4>Values:</h4>
     <p>Enabled: <span id="enabled" class="result">None</span>
     <br>Antenna Available: <span id="antenna" class="result">None</span>
-    <br>Frequency: <span id="channel" class="result">None</span>
+    <br>Frequency: <span id="frequency" class="result">None</span>
     <br>Channel Width: <span id="width" class="result">None</span>
-    <br>Frequency Upper Bound: <span id="upperbound" class="result">None</span>
-    <br>Frequency Lower Bound: <span id="lowerbound" class="result">None</span></p>
+    <br>Frequency Lower Bound: <span id="lowerbound" class="result">None</span>
+    <br>Frequency Upper Bound: <span id="upperbound" class="result">None</span></p>
 
-    <p><button id="enable">Enable</button>
+    <p style='line-height: 36px;'><button id="enable">Enable</button>
     <button id="disable">Disable</button>
     <input type="text" id="frequency"/>
-    <button id="setfreq">Set Freq</button></p>
-
-
-    <p><button id="seekup">Seek Up</button>
+    <button id="setfreq">Set Freq</button>
+    <br><button id="seekup">Seek Up</button>
     <button id="seekdown">Seek Down</button>
     <button id="cancelseek">Cancel Seek</button></p>
   </body>

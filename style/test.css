@@ -4,13 +4,21 @@ body {
 
 button {
   font-size: 14px;
-  height: 28px;
+  height: 30px;
 }
 
 input[type=text] {
   font-size: 14px;
-  height: 28px;
+  height: 26px;
   width: 64px;
+}
+
+h4 {
+  margin-bottom: 0.5em;
+}
+
+h4 + p {
+  margin-top: 0.5em;
 }
 
 .result {

@@ -22,33 +22,18 @@ function selfTest() {
          navigator.mozFMRadio.cancelSeek !== undefined;
 }
 
-function eventTime(event) {
-  return event + ' : ' + getFormattedTime();
-}
-function onRadioEnabled() {
-  report("radio", eventTime('ENABLED'));
-}
-
-function onRadioDisabled() {
-  report("radio", eventTime('DISABLED'));
+function updateValues() {
+  report('enabled', navigator.mozFMRadio.enabled);
+  report('antenna', navigator.mozFMRadio.antennaAvailable);
+  report('frequency', navigator.mozFMRadio.frequency || 'N/A');
+  report('width', navigator.mozFMRadio.channelWidth);
+  report('upperbound', navigator.mozFMRadio.frequencyUpperBound);
+  report('lowerbound', navigator.mozFMRadio.frequencyLowerBound);
 }
 
-function onAntennaAvailable() {
-  if (navigator.mozFMRadio.antennaAvailable) {
-    report("antenna", eventTime('ENABLED'));
-    return true;
-  } else {
-    report("antenna", eventTime('DISABLED'));
-  }
-  return false;
-}
-
-function onFrequencyChange() {
-  report('channel', eventTime(navigator.mozFMRadio.frequency));
-}
-
-function setFrequency(freq) {
-  navigator.mozFMRadio.setFrequency(freq);
+function handleEvents(spanName, evt) {
+  report(spanName, evt.type + " (" +  getFormattedTime() + ")");
+  updateValues();
 }
 
 var clickHandlers = {
@@ -63,7 +48,7 @@ var clickHandlers = {
   },
   'setfreq': function () {
      var text = document.getElementById("frequency").value;
-     setFrequency(parseFloat(text));
+     navigator.mozFMRadio.setFrequency(parseFloat(text));
    },
   'disable': function () {
      navigator.mozFMRadio.disable();
@@ -72,31 +57,6 @@ var clickHandlers = {
      navigator.mozFMRadio.enable(DEFAULT_STATION);
   }
 };
-
-document.body.addEventListener('click', function (evt) {
-  if (clickHandlers[evt.target.id || evt.target.dataset.fn])
-    clickHandlers[evt.target.id || evt.target.dataset.fn].call(this, evt);
-});
-
-function handleEvents(evt) {
-  switch (evt.type)
-  {
-    case "enabled":
-      onRadioEnabled();
-      break;
-    case "disabled":
-      onRadioDisabled();
-      break;
-    case "antennaavailablechange":
-      onAntennaAvailable();
-      break;
-    case "frequencychange":
-      onFrequencyChange();
-      break;
-    default:
-      break;
-   }
-}
 
 report('selftest', 'PASS', 'FAIL', selfTest());
 report('upperbound', navigator.mozFMRadio.frequencyUpperBound);
@@ -107,23 +67,13 @@ document.body.addEventListener('click', function (evt) {
     clickHandlers[evt.target.id || evt.target.dataset.fn].call(this, evt);
 });
 
-window.addEventListener('unload', function(e) {
+window.addEventListener('unload', function (e) {
   navigator.mozFMRadio.disable();
 }, false);
 
+navigator.mozFMRadio.onenabled = function (e) { handleEvents('radioevent', e); }
+navigator.mozFMRadio.ondisabled = function (e) { handleEvents('radioevent', e); }
+navigator.mozFMRadio.onantennaavailablechange = function (e) { handleEvents('changeevent', e); }
+navigator.mozFMRadio.onfrequencychange = function (e) { handleEvents('changeevent', e); }
 
-navigator.mozFMRadio.onenabled=handleEvents;
-navigator.mozFMRadio.ondisabled=handleEvents;
-navigator.mozFMRadio.onantennaavailablechange=handleEvents;
-navigator.mozFMRadio.onfrequencychange=handleEvents;
-
-//Setup Initial State
-if(onAntennaAvailable()) {
-  onFrequencyChange();
-}
-
-if(navigator.mozFMRadio.enabled) {
-  onRadioEnabled();
-} else {
-  onRadioDisabled();
-}
+updateValues();

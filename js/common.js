@@ -7,16 +7,29 @@ function getFormattedTime(date) {
   return date.getHours() + ":" + minutes + ":" + seconds;
 }
 
-function report(spanName, passText, failText, result) {
-  if (result === undefined) {
-    result = true;
-  }
-
+function getSpanFromName(spanName) {
   var span = document.getElementById(spanName);
   if (!span) {
     throw spanName + " does not exist";
   }
 
+  return span
+}
+
+function report(spanName, passText, failText, result) {
+  if (result === undefined) {
+    result = true;
+  }
+
+  span = getSpanFromName(spanName);
   span.innerHTML = result ? passText : failText;
   span.style.color = result ? 'green' : 'red';
+}
+
+function clear(spanName, clearText) {
+  clearText = clearText || "None";
+
+  span = getSpanFromName(spanName);
+  span.innerHTML = clearText;
+  span.style.color = 'red';
 }
