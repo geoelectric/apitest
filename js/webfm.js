@@ -3,7 +3,23 @@
 const DEFAULT_STATION = 89.5;
 
 function selfTest() {
-  return navigator.mozFMRadio !== undefined;
+  return !!navigator.mozFMRadio &&
+         navigator.mozFMRadio.antennaAvailable !== undefined &&
+         navigator.mozFMRadio.enabled !== undefined &&
+         navigator.mozFMRadio.frequency !== undefined &&
+         navigator.mozFMRadio.frequencyUpperBound !== undefined &&
+         navigator.mozFMRadio.frequencyLowerBound !== undefined &&
+         navigator.mozFMRadio.channelWidth !== undefined &&
+         navigator.mozFMRadio.onantennaavailablechange !== undefined &&
+         navigator.mozFMRadio.onfrequencychange !== undefined &&
+         navigator.mozFMRadio.onenabled !== undefined &&
+         navigator.mozFMRadio.ondisabled !== undefined &&
+         navigator.mozFMRadio.enable !== undefined &&
+         navigator.mozFMRadio.disable !== undefined &&
+         navigator.mozFMRadio.setFrequency !== undefined &&
+         navigator.mozFMRadio.seekUp !== undefined &&
+         navigator.mozFMRadio.seekDown !== undefined &&
+         navigator.mozFMRadio.cancelSeek !== undefined;
 }
 
 function eventTime(event) {
@@ -47,7 +63,7 @@ var clickHandlers = {
   },
   'setfreq': function () {
      var text = document.getElementById("frequency").value;
-     setFrequency(parseFloat(text)); 
+     setFrequency(parseFloat(text));
    },
   'disable': function () {
      navigator.mozFMRadio.disable();
@@ -63,9 +79,9 @@ document.body.addEventListener('click', function (evt) {
 });
 
 function handleEvents(evt) {
-  switch (evt.type) 
+  switch (evt.type)
   {
-    case "enabled": 
+    case "enabled":
       onRadioEnabled();
       break;
     case "disabled":
@@ -78,9 +94,8 @@ function handleEvents(evt) {
       onFrequencyChange();
       break;
     default:
-      break; 
+      break;
    }
-  dump(evt.type);
 }
 
 report('selftest', 'PASS', 'FAIL', selfTest());

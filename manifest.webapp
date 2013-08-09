@@ -1,14 +1,17 @@
 {
   "name": "API Testbed",
+  "description": "API Testbed",
   "launch_path": "/index.html",
-  "type": "certified",
-  "developer": {
-    "name": "Geo Mealer",
-    "url": "https://github.com/geoelectric/apitest"
-  },
   "icons": {
     "128": "/style/icons/Apitest.png"
   },
+  "developer": {
+    "name": "Mozilla WebAPI QA",
+    "url": "https://github.com/geoelectric/apitest"
+  },
+  "default_locale": "en",
+  "type": "privileged",
   "permissions": {
+    "fmradio":{"description": "FM Radio Testing"}
   }
 }
