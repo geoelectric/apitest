@@ -12,6 +12,6 @@
   "default_locale": "en",
   "type": "privileged",
   "permissions": {
-    "fmradio":{"description": "FM Radio Testing"}
+    "fmradio": {}
   }
 }
