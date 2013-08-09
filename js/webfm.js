@@ -31,7 +31,7 @@ function updateValues() {
   report('lowerbound', navigator.mozFMRadio.frequencyLowerBound);
 }
 
-function handleEvents(spanName, evt) {
+function reportEvent(spanName, evt) {
   report(spanName, evt.type + " (" +  getFormattedTime() + ")");
   updateValues();
 }
@@ -59,8 +59,6 @@ var clickHandlers = {
 };
 
 report('selftest', 'PASS', 'FAIL', selfTest());
-report('upperbound', navigator.mozFMRadio.frequencyUpperBound);
-report('lowerbound', navigator.mozFMRadio.frequencyLowerBound);
 
 document.body.addEventListener('click', function (evt) {
   if (clickHandlers[evt.target.id || evt.target.dataset.fn])
@@ -71,9 +69,9 @@ window.addEventListener('unload', function (e) {
   navigator.mozFMRadio.disable();
 }, false);
 
-navigator.mozFMRadio.onenabled = function (e) { handleEvents('radioevent', e); }
-navigator.mozFMRadio.ondisabled = function (e) { handleEvents('radioevent', e); }
-navigator.mozFMRadio.onantennaavailablechange = function (e) { handleEvents('changeevent', e); }
-navigator.mozFMRadio.onfrequencychange = function (e) { handleEvents('changeevent', e); }
+navigator.mozFMRadio.onenabled = function (e) { reportEvent('radioevent', e); }
+navigator.mozFMRadio.ondisabled = function (e) { reportEvent('radioevent', e); }
+navigator.mozFMRadio.onantennaavailablechange = function (e) { reportEvent('changeevent', e); }
+navigator.mozFMRadio.onfrequencychange = function (e) { reportEvent('changeevent', e); }
 
 updateValues();
