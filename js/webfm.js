@@ -36,25 +36,31 @@ function reportEvent(spanName, evt) {
   updateValues();
 }
 
+function addResultCallbacks(req) {
+  clear('lastresult', 'In Progress');
+  req.onsuccess = function () { report('lastresult', 'Success'); };
+  req.onerror = function () { report('lastresult', this.error ? 'Error: ' + this.error.name : 'Error'); };
+}
+
 var clickHandlers = {
   'seekup': function () {
-    navigator.mozFMRadio.seekUp();
+    addResultCallbacks(navigator.mozFMRadio.seekUp());
   },
   'seekdown': function () {
-    navigator.mozFMRadio.seekDown();
+    addResultCallbacks(navigator.mozFMRadio.seekDown());
   },
   'cancelseek': function () {
-    navigator.mozFMRadio.cancelSeek();
+    addResultCallbacks(navigator.mozFMRadio.cancelSeek());
   },
   'setfreq': function () {
-     var text = document.getElementById("frequency").value;
-     navigator.mozFMRadio.setFrequency(parseFloat(text));
+     var frequency = parseFloat(document.getElementById('frequencyinput').value);
+     addResultCallbacks(navigator.mozFMRadio.setFrequency(frequency));
    },
   'disable': function () {
-     navigator.mozFMRadio.disable();
+     addResultCallbacks(navigator.mozFMRadio.disable());
   },
   'enable': function () {
-     navigator.mozFMRadio.enable(DEFAULT_STATION);
+     addResultCallbacks(navigator.mozFMRadio.enable(DEFAULT_STATION));
   }
 };
 
@@ -65,7 +71,7 @@ document.body.addEventListener('click', function (evt) {
     clickHandlers[evt.target.id || evt.target.dataset.fn].call(this, evt);
 });
 
-window.addEventListener('unload', function (e) {
+window.addEventListener('unload', function () {
   navigator.mozFMRadio.disable();
 }, false);
 
