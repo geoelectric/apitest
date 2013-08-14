@@ -31,8 +31,12 @@ function getPositionOptions () {
   }
 
   positionOptions['enableHighAccuracy'] = document.getElementById('highaccuracy').checked;
-  positionOptions['timeout'] = document.getElementById('timeout').value || undefined;
-  positionOptions['maximumAge'] = document.getElementById('maxage').value || undefined
+  if (document.getElementById('timeout').value !== "") {
+    positionOptions['timeout'] = Number(document.getElementById('timeout').value);
+  }
+  if (document.getElementById('maxage').value !== "") {
+    positionOptions['maximumAge'] = Number(document.getElementById('maxage').value);
+  }
   return positionOptions;
 }
 
@@ -45,21 +49,25 @@ function useOptionsChange () {
 
 var watchId = undefined;
 
+function resetWatch() {
+  if (watchId !== undefined) {
+    navigator.geolocation.clearWatch(watchId);
+  }
+  watchId = undefined;
+}
+
 var clickHandlers = {
   'getposition': function () {
     clear('lastresult', 'In Progress');
     navigator.geolocation.getCurrentPosition(positionSuccess, positionError, getPositionOptions());
   },
   'watchposition': function () {
-    if (watchId) {
-      return
-    }
+    resetWatch();
     clear('lastresult', 'In Progress');
     watchId = navigator.geolocation.watchPosition(positionSuccess, positionError, getPositionOptions());
   },
   'clearwatch': function () {
-    navigator.geolocation.clearWatch(watchId);
-    watchId = undefined;
+    resetWatch();
   }
 };
 
@@ -71,9 +79,7 @@ document.body.addEventListener('click', function (evt) {
 });
 
 window.addEventListener('unload', function () {
-  if (watchId) {
-      navigator.geolocation.clearWatch(watchId);
-  }
+  resetWatch();
 }, false);
 
 document.getElementById('useoptions').onchange = useOptionsChange;
