@@ -13,6 +13,8 @@ input[type=text] {
   width: 64px;
 }
 
+input:disabled { background: #ccc; }
+
 h4 {
   margin-bottom: 0.5em;
 }

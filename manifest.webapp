@@ -12,6 +12,7 @@
   "default_locale": "en",
   "type": "privileged",
   "permissions": {
-    "fmradio": {}
+    "fmradio": {},
+    "geolocation": {}
   }
 }

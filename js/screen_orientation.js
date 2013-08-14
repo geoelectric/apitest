@@ -1,5 +1,12 @@
 'use strict';
 
+function selfTest() {
+  return screen.onmozorientationchange !== undefined &&
+         screen.mozLockOrientation !== undefined &&
+         screen.mozUnlockOrientation !== undefined &&
+         orientationIsValid(screen.mozOrientation);
+}
+
 function orientationIsValid(orientation) {
   return ['portrait',
           'landscape',
@@ -7,13 +14,6 @@ function orientationIsValid(orientation) {
           'portrait-secondary',
           'landscape-primary',
           'landscape-secondary'].indexOf(orientation) !== -1;
-}
-
-function selfTest() {
-  return screen.onmozorientationchange !== undefined &&
-         screen.mozLockOrientation !== undefined &&
-         screen.mozUnlockOrientation !== undefined &&
-         orientationIsValid(screen.mozOrientation);
 }
 
 function handleOrientationChange(evt) {
