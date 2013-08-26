@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Device Storage</title>
+    <link rel="stylesheet" type="text/css" href="../style/test.css">
+    <script defer src="../js/common.js"></script>
+    <script defer type=application/javascript;version=1.7 src="../js/device_storage.js"></script>
+  </head>
+  <body>
+    <p>API Self-Test: <span id="selftest" class="result">Not Run</span></p>
+    <table>
+      <tr><td>
+          <select id="devicestorage" name="devicestorage">
+            <option value="sdcard" selected>sdcard</option>
+            <option value="pictures">pictures</option>
+            <option value="music">music</option>
+            <option value="videos">videos</option>
+            <option value="apps">apps</option>
+          </select>
+          </td>
+     </tr>
+      <tr><td id="results">
+       <em>Results:</em>
+      </td></tr>
+   </table>
+  </body>
+</html>
