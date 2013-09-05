@@ -37,7 +37,15 @@ function selfTest() {
          navigator.getDeviceStorage("pictures") !== undefined &&
          navigator.getDeviceStorage("music") !== undefined &&
          navigator.getDeviceStorage("sdcard") !== undefined &&
-         navigator.getDeviceStorage("videos") !== undefined;
+         navigator.getDeviceStorage("videos") !== undefined &&
+         navigator.getDeviceStorage("pictures").delete !== undefined &&
+         navigator.getDeviceStorage("pictures").add !== undefined &&
+         navigator.getDeviceStorage("pictures").addNamed !== undefined &&
+         navigator.getDeviceStorage("pictures").available !== undefined &&
+         navigator.getDeviceStorage("pictures").freeSpace !== undefined &&
+         navigator.getDeviceStorage("pictures").usedSpace !== undefined &&
+         navigator.getDeviceStorage("pictures").enumerateEditable !== undefined &&
+         navigator.getDeviceStorage("pictures").enumerate !== undefined ;
 }
 
 function getRandomBuffer() {
