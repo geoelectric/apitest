@@ -75,7 +75,7 @@ function addFiles(next) {
   for (var i=0;i < gActiveFiles.length; i++)  {
     var request = gStorage.addNamed(createRandomBlob(blobTypes[gIndex]), gActiveFiles[i]);
     request.onsuccess = function () {
-      success +=1;
+      success+= 1;
       if (success == gActiveFiles.length) {
         logResult("addnamed", true, success + " files successfully added of " + gActiveFiles.length);
         next();
@@ -210,7 +210,7 @@ function enumerateEditable(next) {
 }
 
 function onChange(change) {
-  changeevents[change.reason]+=1;
+  changeevents[change.reason]+= 1;
 }
 
 function addChangeListener(next) {
@@ -242,7 +242,7 @@ function deleteFiles(next) {
   for (i=0;i < gActiveFiles.length; i++)  {
     var request = gStorage.delete(gActiveFiles[i]);
     request.onsuccess = function () {
-      success +=1;
+      success+= 1;
       if (success == gActiveFiles.length) {
         logResult("deleteFiles", true, success + " files successfully deleted of " + gActiveFiles.length);
         next();
@@ -260,7 +260,7 @@ report('selftest', 'PASS', 'FAIL', selfTest());
 var storageTypes = ["pictures", "videos", "music", "sdcard", "apps"];
 var blobTypes = ["image/png", "video/webm", "audio/mp3", "text/plain", "text/plain"];
 var files = [["a.png", "b.png", "c.png"], 
-             ["a.ogv", "b.ogv"],
+             ["a.webm", "b.webm"],
              ["a.mp3", "b.mp3", "c.mp3"], 
              ["plain.txt"], 
              ["foobar.txt", "b.mp4"]];
@@ -295,16 +295,5 @@ document.body.addEventListener('change', function (evt) {
                                });
 
 window.onload = function () {
-  var dstorages_txt  = "";
-
-  for (var types in storageTypes) {
-    var dstorages = navigator.getDeviceStorages(types); 
-    console.log(dstorages);
-    for (var i = 0; i < dstorages.length; i++) {
-      dstorages_txt = dstorages_txt.concat(dstorages[i].storageName, ", ");
-    }
-  }
-
-  logResult("dstorages", true, "storages available : " + dstorages_txt);
   runAll(orders);
 }
