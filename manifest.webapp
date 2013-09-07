@@ -12,11 +12,12 @@
   "default_locale": "en",
   "type": "privileged",
   "permissions": {
-    "fmradio": {},
-    "geolocation": {},
+    "alarms": {},
     "device-storage:sdcard":{ "access": "readwrite" },
     "device-storage:music":{ "access": "readwrite" },
     "device-storage:pictures":{ "access": "readwrite" },
-    "device-storage:videos":{ "access": "readwrite" }
+    "device-storage:videos":{ "access": "readwrite" },
+    "fmradio": {},
+    "geolocation": {}
   }
 }
