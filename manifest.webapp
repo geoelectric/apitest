@@ -18,7 +18,8 @@
     "device-storage:pictures":{ "access": "readwrite" },
     "device-storage:videos":{ "access": "readwrite" },
     "fmradio": {},
-    "geolocation": {}
+    "geolocation": {},
+    "webapps-manage": {},
     "contacts":{ "access": "readwrite" }
   }
 }
