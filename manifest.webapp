@@ -19,7 +19,6 @@
     "device-storage:videos":{ "access": "readwrite" },
     "fmradio": {},
     "geolocation": {},
-    "webapps-manage": {},
     "contacts":{ "access": "readwrite" }
   }
 }
