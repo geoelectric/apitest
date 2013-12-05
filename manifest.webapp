@@ -11,6 +11,32 @@
   },
   "default_locale": "en",
   "type": "privileged",
+  "activities": {
+    "pick": {
+      "href": "/activityhandler.html#pick1",
+      "disposition": "inline", 
+      "filters": {
+        "type": ["image/*", "image/jpeg"]
+      },
+      "returnValue": true
+    },
+    "pick2": {
+       "href": "/activityhandler.html#pick2",
+       "disposition": "inline",
+       "filters": {
+         "type": ["image/*", "image/jpeg"]
+       },
+       "returnValue": false
+     },
+    "error": {
+       "href": "/activityhandler.html",
+       "disposition": "inline",
+       "filters": {
+         "type": ["image/*","image/jpeg"]
+       },
+       "returnValue": true
+     }
+  },
   "permissions": {
     "alarms": {},
     "device-storage:sdcard":{ "access": "readwrite" },

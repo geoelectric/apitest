@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Empty Test</title>
+    <link rel="stylesheet" type="text/css" href="../style/test.css">
+    <script defer src="js/common.js"></script>
+  </head>
+  <body> 
+    <div id="images"></div>
+  </body>
+  <script>
+    function getBase64Image(text) {
+      // Create an empty canvas element
+      var canvas = document.createElement("canvas");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      canvas.id = text;
+      document.body.appendChild(canvas);
+      var ctx = canvas.getContext("2d");
+      ctx.font="30px Arial";
+      ctx.strokeText(text,10,50);
+      document.body.appendChild(canvas);
+      var dataURL = canvas.toDataURL();
+      return dataURL;
+    }
+    navigator.mozSetMessageHandler('activity', function(activityRequest) {
+      var option = activityRequest.source;
+      var picture = null;
+      var url = document.URL;
+      if (url.lastIndexOf("pick1") > 0) {
+        // Do something to handle the activity
+        picture = getBase64Image("Overlay");
+        window.setTimeout(function () {
+          activityRequest.postResult({blob : picture});
+        }, 5000);
+      }
+      if (url.lastIndexOf("pick2") > 0 ) {
+        picture = getBase64Image("Overlay No Return");
+        img = document.createElement("img");
+        img.id = "result";
+        img.src = picture;
+        var src = document.getElementById("images");
+        src.appendChild(img);
+        window.setTimeout(function () {
+            activityRequest.postResult({blob : picture});
+        }, 5000);
+      }
+      if (option.name === "doodle") {
+        picture = getBase64Image("New Window");
+        img = document.createElement("img");
+         img.id = "result";
+         img.src = picture;
+         var src = document.getElementById("images");
+         src.appendChild(img);
+         window.setTimeout(function () {
+             activityRequest.postResult({blob : picture});
+         }, 5000);
+      } 
+      if (option.name === "error") {
+        activityRequest.postError("Unable to provide a picture");
+      }
+    });
+ </script>
+</html>
