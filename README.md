@@ -3,4 +3,7 @@ apitest
 
 API Testbed for Firefox OS
 
-Install using Tools | Web Developer | Firefox OS Simulator for FxOS <=1.1 or about:app-manager for FxOS >= 1.2
+Install using Firefox OS Simulator for FxOS <=1.1 or Firefox App Manager for FxOS >= 1.2
+
+https://developer.mozilla.org/en/docs/Tools/Firefox_OS_Simulator
+https://developer.mozilla.org/en-US/Firefox_OS/Using_the_App_Manager
