@@ -17,7 +17,8 @@ var manifest = {
 }
 
 function selfTest() {
-  return navigator.mozApps.install !== undefined &&
+  return !!navigator.mozApps &&
+         navigator.mozApps.install !== undefined &&
          navigator.mozApps.getSelf !== undefined &&
          navigator.mozApps.getInstalled !== undefined &&
          navigator.mozApps.checkInstalled !== undefined &&
@@ -100,9 +101,11 @@ var AppsTest = (function AppsTests() {
     start: start,
     checkUpdate: checkUpdate,
     checkReceipts: checkReceipts,
-    getInstalled: getInstalled
+    //getInstalled: getInstalled
   };
 })();
+
+report('selftest', 'PASS', 'FAIL', selfTest());
 
 promise.chain([
         function () {
@@ -119,4 +122,4 @@ promise.chain([
       report("checkReceipts",results, 'FAIL', err);
     }
 );
-report('selftest', 'PASS', 'FAIL', selfTest());
+

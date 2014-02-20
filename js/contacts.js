@@ -187,7 +187,7 @@ function next() {
 }
 
 function selfTest() {
-  return navigator.mozContacts !== undefined &&
+  return !!navigator.mozContacts &&
          navigator.mozContacts.save !== undefined &&
          navigator.mozContacts.getAll !== undefined &&
          navigator.mozContacts.find !== undefined &&

@@ -1,7 +1,7 @@
 'use strict';
 
 function selfTest() {
-  return navigator.mozPay != undefined
+  return !!navigator.mozPay;
 }
 
 var MozPay = (function MozPay() {
@@ -93,8 +93,8 @@ var MozPay = (function MozPay() {
     return null;
   }
 
-  return { 
-    mozPay: mozPay, 
+  return {
+    mozPay: mozPay,
     jwtSigned: jwtSigned,
     jwtSource: jwtSource
   };

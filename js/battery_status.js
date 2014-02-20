@@ -1,7 +1,7 @@
 'use strict';
 
 function selfTest() {
-  return navigator.battery !== undefined &&
+  return !!navigator.battery &&
          navigator.battery.charging !== undefined &&
          navigator.battery.chargingTime !== undefined &&
          navigator.battery.dischargingTime !== undefined &&

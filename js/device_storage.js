@@ -27,13 +27,14 @@ function logResult(testname, result, msg) {
     var my_results = document.getElementById("results");
     my_results.appendChild(test);
     my_results.appendChild(span);
-  } 
+  }
   msg = testname + ": " + msg;
   report(testname, msg, msg, result);
 }
 
 function selfTest() {
-  return navigator.getDeviceStorage("kilimanjaro") == undefined &&
+  return !!navigator.getDeviceStorage &&
+         navigator.getDeviceStorage("kilimanjaro") == undefined &&
          navigator.getDeviceStorage("pictures") !== undefined &&
          navigator.getDeviceStorage("music") !== undefined &&
          navigator.getDeviceStorage("sdcard") !== undefined &&
@@ -79,7 +80,7 @@ function add(next) {
 }
 
 function addFiles(next) {
-  var success = 0; 
+  var success = 0;
   for (var i=0;i < gActiveFiles.length; i++)  {
     var request = gStorage.addNamed(createRandomBlob(blobTypes[gIndex]), gActiveFiles[i]);
     request.onsuccess = function () {
@@ -97,9 +98,9 @@ function addFiles(next) {
 }
 
 function setup (next) {
-  var setupSteps = [ deleteFiles, 
+  var setupSteps = [ deleteFiles,
                      freeSpace,
-                     usedSpace, 
+                     usedSpace,
                      available,
                      addChangeListener,
                      add,
@@ -137,11 +138,11 @@ function usedSpace(next) {
     if (used == null) {
       used = this.result;
     } else {
-      
+
       var space = this.result - used;
       var msg = " space changed = " + space + " bytes";
       logResult('usedspace', space > 1000, msg);
-      used = null; 
+      used = null;
     }
     next();
   }
@@ -182,7 +183,7 @@ function enumerate(next) {
   cursor.onsuccess = function () {
      if (cursor.result !== null) {
        enumeratedfiles.push(cursor.result.name);
-       cursor.continue(); 
+       cursor.continue();
      } else {
        for each (var file in gActiveFiles) {
          if((enumeratedfiles.indexOf(file) < 0) &&
@@ -197,11 +198,11 @@ function enumerate(next) {
 }
 
 function enumerateEditable(next) {
-  var cursor = gStorage.enumerateEditable(); 
+  var cursor = gStorage.enumerateEditable();
   var enumeratedfiles = [];
   var pass = true;
   cursor.onsuccess = function () {
-    if (cursor.result !== null) { 
+    if (cursor.result !== null) {
       enumeratedfiles.push(cursor.result.name);
       cursor.continue();
     } else {
@@ -230,9 +231,9 @@ function addChangeListener(next) {
 
 function changed() {
   gStorage.removeEventListener("change", onChange);
-  logResult("createdevents", changeevents["created"] == (gActiveFiles.length + 1) ? true : false, 
+  logResult("createdevents", changeevents["created"] == (gActiveFiles.length + 1) ? true : false,
             changeevents["created"]);
-  logResult("modifiedevents", changeevents["modified"] == (gActiveFiles.length + 1) ? true : false, 
+  logResult("modifiedevents", changeevents["modified"] == (gActiveFiles.length + 1) ? true : false,
             changeevents["modified"]);
   logResult("deletedevents", changeevents["deleted"] == (gActiveFiles.length + 1) ? true : false,
             changeevents["deleted"]);
@@ -257,7 +258,7 @@ function deleteFiles(next) {
       }
     };
     request.onerror = function (e) {
-      logResult("delete", false, "failure deleting file " + gActiveFiles[i] + 
+      logResult("delete", false, "failure deleting file " + gActiveFiles[i] +
                  "reason: " + e.target.error.name);
     };
   }
@@ -267,10 +268,10 @@ report('selftest', 'PASS', 'FAIL', selfTest());
 
 var storageTypes = ["pictures", "videos", "music", "sdcard", "apps"];
 var blobTypes = ["image/png", "video/webm", "audio/mp3", "text/plain", "text/plain"];
-var files = [["a.png", "b.png", "c.png"], 
+var files = [["a.png", "b.png", "c.png"],
              ["a.webm", "b.webm"],
-             ["a.mp3", "b.mp3", "c.mp3"], 
-             ["plain.txt"], 
+             ["a.mp3", "b.mp3", "c.mp3"],
+             ["plain.txt"],
              ["foobar.txt", "b.mp4"]];
 var gIndex = 0;
 var gActiveFiles = null;
@@ -282,14 +283,14 @@ var used = null;
 var free = null;
 
 var changeevents = new Array();
-changeevents['created'] = 0; 
-changeevents['modified'] = 0; 
-changeevents['deleted'] = 0; 
+changeevents['created'] = 0;
+changeevents['modified'] = 0;
+changeevents['deleted'] = 0;
 
 var orders = [
   setup,
   freeSpace,
-  usedSpace, 
+  usedSpace,
   enumerate,
   enumerateEditable,
   get,
@@ -298,7 +299,7 @@ var orders = [
 ];
 
 document.body.addEventListener('change', function (evt) {
-                               if (evt.target.id == "devicestorage" ) 
+                               if (evt.target.id == "devicestorage" )
                                  runAll(orders);
                                });
 
