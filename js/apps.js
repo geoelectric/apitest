@@ -8,7 +8,9 @@ var manifest = {
    "type": "privileged",
    "launch_path": "/index.html",
    "icons": {
-     "128": "/style/icons/Apitest.png"
+     "128": "/style/icons/Apitest.png",
+     "120": "/style/icons/Apitest_120.png",
+     "60": "/style/icons/Apitest_60.png"
    },
    "developer": {
      "name": "Mozilla WebAPI QA",
