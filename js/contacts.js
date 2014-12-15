@@ -3,20 +3,20 @@
 var index = 0;
 var mozContactDBLength = 0;
 
-var contactsdb = [{"name": "John Smith",
+var contactsdb = [{"name": ["John Smith"],
                    "familyName": ["Smith"],
                    "givenName": ["John"],
-                   "email": "john@google.com",
+                   "email": [{type: ["work"], value: "john@google.com", pref: true}],
                    "tel": [{type: ["work"], value:"19834451515", carrier: "testCarrier"}]},
-                  {"name": "Tony Weston",
+                  {"name": ["Tony Weston"],
                    "familyName": ["Weston"],
                    "givenName": ["Tony"],
-                   "email": "tony@google.com",
+                   "email": [{type: ["work"], value: "tony@google.com", pref: true}],
                    "tel": [{type: ["work"], value:"19815551212", carrier: "testCarrier"}]},
-                  {"name": "Clark Kent",
+                  {"name": ["Clark Kent"],
                    "familyName": ["Kent"],
                    "givenName": ["Clark"],
-                   "email": "superman@kryptonite.com",
+                   "email": [{type: ["work"], value: "superman@kryptonite.com", pref: true}],
                    "tel":  [{type: ["work"], value: "14155551212", carrier: "testCarrier"}]}];
 var contact;
 var notifications = {'update' : 0,
